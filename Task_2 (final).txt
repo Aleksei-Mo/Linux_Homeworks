@@ -1,0 +1,26 @@
+#!/bin/bash
+echo "Please write folder name to sort files:"
+read path
+if [ -d "$path" ]
+then
+ echo "Folder has been found!"
+  for file in $path/*
+   do
+   if [ -e "$file" ]
+   then 
+    owner=`ls -l $file | awk {'print $3'}
+	echo $owner is ownerName
+	if [ -d "$owner" ]
+	then 
+	 echo start copy file to $owner folder
+	 sudo cp $file $path/$owner
+	else
+	 echo $owner folder creation and start to copy files.
+	 sudo mkdir $owner
+	 sudo cp $file $path/$owner
+	fi
+    fi
+  done
+else
+ echo "Error! Folder doesn't exist."
+fi 

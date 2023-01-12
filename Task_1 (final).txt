@@ -1,0 +1,19 @@
+#!/bin/bash
+echo You are going to clear the following directory...
+read f_name
+if [ -d "$f_name" ]
+then
+ echo "Folder has been found ! Deleting..."
+ for file in $f_name/*
+   do
+   if [[ "$file" == *".bak"* ]] || [[ "$file" == *".tmp"* ]] ||[[ "$file" == *".backup"* ]]
+   then
+    rm $file
+	echo $file has been deleted successfully.
+   else
+    echo "There are no any .bak, .backup or .tmp files in this folder"
+   fi
+ done
+else
+ echo "Folder has not been found. Error!"
+fi
